@@ -56,21 +56,21 @@
     </button>
     <button
       :class="{ 'is-active': editor.isActive({ textAlign: 'center' }) }"
-      @click="editor.chain().focus().setTextAlign('center').run()"
+      @click="alignCenter"
     >
       Align Center
     </button>
     <button
       :class="{ 'is-active': editor.isActive({ textAlign: 'right' }) }"
-      @click="editor.chain().focus().setTextAlign('right').run()"
+      @click="alignRight"
     >
       Align Right
     </button>
     <button
       :class="{ 'is-active': editor.isActive({ textAlign: 'justify' }) }"
-      @click="editor.chain().focus().setTextAlign('justify').run()"
+      @click="alignLeft"
     >
-      Justify
+      Align Left
     </button>
     <button @click="setLink" :class="{ 'is-active': editor.isActive('link') }">
       Set link
@@ -98,6 +98,27 @@ export default {
 
       if (url) {
         this.editor.chain().focus().setImage({ src: url }).run();
+      }
+    },
+    alignRight() {
+      if (this.editor.isActive("image")) {
+        this.editor.commands.updateAttributes("image", { alignment: "right" });
+      } else {
+        this.editor.chain().focus().setTextAlign("right").run();
+      }
+    },
+    alignLeft() {
+      if (this.editor.isActive("image")) {
+        this.editor.commands.updateAttributes("image", { alignment: "left" });
+      } else {
+        this.editor.chain().focus().setTextAlign("justify").run();
+      }
+    },
+    alignCenter() {
+      if (this.editor.isActive("image")) {
+        this.editor.commands.updateAttributes("image", { alignment: "center" });
+      } else {
+        this.editor.chain().focus().setTextAlign("center").run();
       }
     },
     setLink() {

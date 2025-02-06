@@ -3,11 +3,11 @@
     <editor-content :editor="editor" />
     <SlashComponents v-if="isSlashing" />
     <ControlPanel :editor="editor" />
-    <div class="result">
+    <!-- <div class="result">
       <div v-html="modelValue"></div>
       <hr />
       <div>{{ modelValue }}</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -21,7 +21,7 @@ import Mention from "@tiptap/extension-mention";
 import Link from "@tiptap/extension-link";
 import suggestion from "./_editor/utils/suggestion";
 import Placeholder from "@tiptap/extension-placeholder";
-import Image from "@tiptap/extension-image";
+import CustomImage from "./_editor/utils/customImage";
 
 export default {
   components: {
@@ -66,7 +66,7 @@ export default {
     this.editor = new Editor({
       extensions: [
         StarterKit,
-        Image,
+        CustomImage,
         Placeholder.configure({
           placeholder: "Write something …",
         }),
@@ -195,7 +195,9 @@ export default {
   height: 1rem;
   color: blue; /* 이렇게 하면 scoped를 벗어난 p 태그에 스타일을 적용 */
 }
-
+.result :deep(img) {
+  margin-block: 1rem;
+}
 .result :deep(.mention) {
   background-color: blueviolet;
   border-radius: 0.25rem;
