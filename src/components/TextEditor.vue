@@ -3,11 +3,11 @@
     <editor-content :editor="editor" />
     <SlashComponents v-if="isSlashing" />
     <ControlPanel :editor="editor" />
-    <!-- <div class="result">
+    <div class="result">
       <div v-html="modelValue"></div>
       <hr />
       <div>{{ modelValue }}</div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -75,6 +75,7 @@ export default {
         }),
         Link.configure({
           openOnClick: false,
+          autolink: true,
           defaultProtocol: "https",
         }),
         Mention.configure({
@@ -193,11 +194,14 @@ export default {
 .result :deep(p) {
   margin: 0px;
   height: 1rem;
-  color: blue; /* 이렇게 하면 scoped를 벗어난 p 태그에 스타일을 적용 */
+  color: blue;
+  /* 이렇게 하면 scoped를 벗어난 p 태그에 스타일을 적용 */
 }
+
 .result :deep(img) {
   margin-block: 1rem;
 }
+
 .result :deep(.mention) {
   background-color: blueviolet;
   border-radius: 0.25rem;
@@ -209,6 +213,7 @@ export default {
 .result {
   width: 900px;
   height: 600px;
+  overflow-y: auto;
   border: 1px solid black;
   padding: 1rem;
 
@@ -262,6 +267,7 @@ export default {
   h6 {
     font-size: 1rem;
   }
+
   em {
     font-style: oblique !important;
   }
